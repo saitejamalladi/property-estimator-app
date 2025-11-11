@@ -1,0 +1,79 @@
+.score-panel {
+  background-color: #111827;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.score-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.score-panel__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.score-panel__status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.score-panel__status--ok {
+  background-color: #10b981;
+  color: white;
+}
+
+.score-panel__status--fail {
+  background-color: #dc2626;
+  color: white;
+}
+
+.score-panel__score {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.score-panel__score-value {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+.score-panel__score-label {
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+.score-panel__failures {
+  border-top: 1px solid #374151;
+  padding-top: 1rem;
+}
+
+.score-panel__failures-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #dc2626;
+}
+
+.score-panel__failures-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.score-panel__failure-item {
+  color: #f87171;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
