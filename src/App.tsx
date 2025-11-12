@@ -73,17 +73,15 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
         value={propertyTitle}
         onChange={setPropertyTitle}
       />
-      <div className="app__main">
-        <MetricsGrid
-          config={scoringConfig}
-          selections={selections}
-          onSelect={handleSelect}
-        />
-        <ScorePanel
-          propertyTitle={propertyTitle}
-          scoreResult={scoreResult}
-        />
-      </div>
+      <MetricsGrid
+        config={scoringConfig}
+        selections={selections}
+        onSelect={handleSelect}
+      />
+      <ScorePanel
+        propertyTitle={propertyTitle}
+        scoreResult={scoreResult}
+      />
       <FooterActions
         onReset={handleReset}
         onCopy={handleCopy}
