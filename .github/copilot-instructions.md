@@ -83,12 +83,12 @@ touch releases/{issue-number}_{description}.md
 ### 2. Create Feature Branch
 
 ```bash
-# Create and switch to feature branch
-git checkout -b feature/{descriptive-name}
+# Create and switch to feature branch from remote main
+git checkout -b feature/{descriptive-name} origin/main
 
 # Examples:
-git checkout -b feature/inline-metric-value
-git checkout -b feature/edit-json-config
+git checkout -b feature/inline-metric-value origin/main
+git checkout -b feature/edit-json-config origin/main
 ```
 
 ### 3. Implement Changes
@@ -164,7 +164,7 @@ Before creating a pull request, ensure:
 - [ ] No console errors or warnings
 
 ### ✅ Git Hygiene
-- [ ] Feature branch created from `main`
+- [ ] Feature branch created from `origin/main`
 - [ ] Descriptive branch name used
 - [ ] Commit messages follow conventional format
 - [ ] All changes staged and committed
@@ -402,8 +402,8 @@ After merge to main:
 # 1. Create release doc
 touch releases/{N}_{description}.md
 
-# 2. Create feature branch
-git checkout -b feature/{name}
+# 2. Create feature branch from origin/main
+git checkout -b feature/{name} origin/main
 
 # 3. Make changes
 
