@@ -1,34 +1,42 @@
 import { useState, useMemo } from 'react';
-import type { Selection } from './types';
-import { scoringConfig } from './config';
+import type { Selection, Config } from './types';
+import { DEFAULT_CONFIG } from './config';
 import { computeScore } from './computeScore';
 import Header from './components/Header';
 import PropertyTitleInput from './components/PropertyTitleInput';
 import MetricsGrid from './components/MetricsGrid';
 import ScorePanel from './components/ScorePanel';
 import FooterActions from './components/FooterActions';
+import ConfigEditorModal from './components/ConfigEditorModal';
 import './App.css';
 
 function App() {
   const [propertyTitle, setPropertyTitle] = useState('');
 
+  // Load config from localStorage or use default
+  const [config, setConfig] = useState<Config>(() => {
+    const saved = localStorage.getItem('propertyEstimatorConfig');
+    return saved ? JSON.parse(saved) : DEFAULT_CONFIG;
+  });
+
   // Initialize selections with first non-gateFail option for each metric
   const initialSelections: Selection = useMemo(() => {
     const selections: Selection = {};
-    Object.entries(scoringConfig.metrics).forEach(([metricId, metric]) => {
+    Object.entries(config.metrics).forEach(([metricId, metric]) => {
       const firstNonGateFail = metric.options.find(opt => !opt.gateFail);
       if (firstNonGateFail) {
         selections[metricId] = firstNonGateFail.id;
       }
     });
     return selections;
-  }, []);
+  }, [config]);
 
   const [selections, setSelections] = useState<Selection>(initialSelections);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const scoreResult = useMemo(() => {
-    return computeScore(scoringConfig, selections);
-  }, [selections]);
+    return computeScore(config, selections);
+  }, [config, selections]);
 
   const handleSelect = (metricId: string, optionId: string) => {
     setSelections(prev => ({
@@ -49,7 +57,7 @@ Final Score: ${scoreResult.score}
 
 Selections:
 ${Object.entries(selections).map(([metricId, optionId]) => {
-  const metric = scoringConfig.metrics[metricId];
+  const metric = config.metrics[metricId];
   const option = metric.options.find(opt => opt.id === optionId);
   return `${metric.label}: ${option?.label} (${option?.value}×)`;
 }).join('\n')}
@@ -66,15 +74,33 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
     }
   };
 
+  const handleEditSettings = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleSaveConfig = (newConfig: Config) => {
+    setConfig(newConfig);
+    localStorage.setItem('propertyEstimatorConfig', JSON.stringify(newConfig));
+    // Reset selections to match new config
+    const newSelections: Selection = {};
+    Object.entries(newConfig.metrics).forEach(([metricId, metric]) => {
+      const firstNonGateFail = metric.options.find(opt => !opt.gateFail);
+      if (firstNonGateFail) {
+        newSelections[metricId] = firstNonGateFail.id;
+      }
+    });
+    setSelections(newSelections);
+  };
+
   return (
     <div className="app">
-      <Header />
+      <Header onEditSettings={handleEditSettings} />
       <PropertyTitleInput
         value={propertyTitle}
         onChange={setPropertyTitle}
       />
       <MetricsGrid
-        config={scoringConfig}
+        config={config}
         selections={selections}
         onSelect={handleSelect}
       />
@@ -85,6 +111,12 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
       <FooterActions
         onReset={handleReset}
         onCopy={handleCopy}
+      />
+      <ConfigEditorModal
+        isOpen={isModalOpen}
+        config={config}
+        onSave={handleSaveConfig}
+        onClose={() => setIsModalOpen(false)}
       />
     </div>
   );

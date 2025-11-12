@@ -1,6 +1,6 @@
 import type { Config } from './types';
 
-export const scoringConfig: Config = {
+export const DEFAULT_CONFIG: Config = {
   aggregation: {
     basePoints: 50,
     formula: "Final = basePoints * product(1 + (m_i - 1) * w_i)"
