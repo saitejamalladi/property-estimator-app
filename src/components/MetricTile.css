@@ -8,10 +8,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
-  min-height: 120px;
+  min-height: 80px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .metric-tile:hover {
@@ -42,12 +42,14 @@
   font-weight: 600;
   color: #1f2937;
   margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
 
 .metric-tile__multiplier {
   font-size: 0.875rem;
   color: #6b7280;
-  font-weight: 500;
+  font-weight: 400;
+  margin-left: 0.25rem;
 }
 
 .metric-tile__badge {

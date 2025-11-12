@@ -15,8 +15,9 @@ function MetricTile({ option, selected, onSelect }: MetricTileProps) {
       className={`metric-tile ${selected ? 'metric-tile--selected' : ''} ${option.gateFail ? 'metric-tile--gatefail' : ''}`}
       aria-pressed={selected}
     >
-      <div className="metric-tile__label">{option.label}</div>
-      <div className="metric-tile__multiplier">{option.value.toFixed(2)}×</div>
+      <div className="metric-tile__label">
+        {option.label} <span className="metric-tile__multiplier">({option.value.toFixed(2)}×)</span>
+      </div>
       {option.gateFail && <div className="metric-tile__badge">Deal Breaker</div>}
     </button>
   );
