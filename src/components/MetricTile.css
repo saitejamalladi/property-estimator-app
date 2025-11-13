@@ -17,7 +17,8 @@
 
 .metric-tile:hover {
   border-color: #3b82f6;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
 }
 
 .metric-tile:focus {
@@ -29,6 +30,8 @@
 .metric-tile--selected {
   border-color: #3b82f6;
   background-color: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
 }
 
 .metric-tile--gatefail {
@@ -37,6 +40,11 @@
 
 .metric-tile--gatefail.metric-tile--selected {
   background-color: rgba(220, 38, 38, 0.05);
+}
+
+.metric-tile--selected:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .metric-tile__label {
