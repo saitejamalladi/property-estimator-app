@@ -52,6 +52,66 @@ Brief description of the change
 ## Technical Details
 Code snippets, implementation notes
 
+## Development Workflow and Git Steps (MANDATORY)
+
+Follow the repository's Copilot workflow requirements.
+
+1. Create feature branch from remote main (FIRST STEP)
+
+```bash
+git checkout -b feature/{descriptive-name} origin/main
+```
+
+2. Implement the changes as outlined above
+
+3. Run quality checks (MANDATORY)
+
+```bash
+npm run lint
+npm run build
+```
+
+4. Commit with a Conventional Commit message and include the issue reference
+
+```bash
+git add .
+git commit -m "{type}: {brief description}
+
+- Change 1
+- Change 2
+- Change 3
+
+Closes #{issue-number}"
+```
+
+5. Push and open a Pull Request
+
+```bash
+git push origin feature/{branch-name}
+```
+
+Create the PR via GitHub UI (link appears in terminal or use repo URL) and use the PR template.
+
+## Pre-PR Checklist
+- [ ] Release documentation file created/updated in `releases/` (this file)
+- [ ] `npm run lint` passes with no errors
+- [ ] `npm run build` completes successfully (no TS errors)
+- [ ] Manual testing completed (desktop + mobile responsiveness)
+- [ ] Accessibility respected (keyboard navigation, ARIA labels)
+- [ ] No console errors or warnings
+- [ ] Feature branch created from `origin/main` as FIRST STEP
+- [ ] Descriptive branch name used
+- [ ] Commit message uses Conventional Commits and references issue
+
+## Pull Request
+
+Title format:
+```
+{type}: {Brief description}
+```
+
+Suggested PR description template provided above.
+
 ## Notes
 Additional context
 ```
@@ -69,26 +129,33 @@ Additional context
 
 ## Development Workflow
 
-### 1. Create Issue Documentation
+**CRITICAL: Always create a feature branch FIRST before any implementation work.**
 
-Before starting work, create a release documentation file:
+### 1. Create Feature Branch (FIRST STEP - MANDATORY)
 
-```bash
-# Create the action plan file
-touch releases/{issue-number}_{description}.md
-
-# Edit the file with issue summary, action plan, technical details
-```
-
-### 2. Create Feature Branch
+**Before doing anything else**, create a feature branch from remote main:
 
 ```bash
-# Create and switch to feature branch from remote main
+# STEP 1: Create and switch to feature branch from remote main
 git checkout -b feature/{descriptive-name} origin/main
 
 # Examples:
 git checkout -b feature/inline-metric-value origin/main
 git checkout -b feature/edit-json-config origin/main
+git checkout -b feature/add-dark-mode origin/main
+```
+
+**Never work directly on `main` branch. Always create a feature branch first.**
+
+### 2. Create Issue Documentation
+
+After creating the feature branch, create a release documentation file:
+
+```bash
+# Create the action plan file
+touch releases/{issue-number}_{description}.md
+
+# Edit the file with issue summary, action plan, technical details, and git workflow
 ```
 
 ### 3. Implement Changes
@@ -398,29 +465,40 @@ After merge to main:
 
 ## Summary: Required Workflow for Copilot
 
-```bash
-# 1. Create release doc
-touch releases/{N}_{description}.md
+**MANDATORY ORDER - Follow these steps exactly:**
 
-# 2. Create feature branch from origin/main
+```bash
+# 1. FIRST STEP: Create feature branch from origin/main (BEFORE ANY OTHER WORK)
 git checkout -b feature/{name} origin/main
 
-# 3. Make changes
+# 2. Create release doc
+touch releases/{N}_{description}.md
+# Edit the file with action plan, technical details, AND git workflow steps
 
-# 4. Test (MANDATORY)
+# 3. Make changes (implement the feature)
+
+# 4. Test (MANDATORY - must pass with zero errors)
 npm run lint && npm run build
 
-# 5. Commit
+# 5. Commit with conventional message
 git add .
-git commit -m "feat: description"
+git commit -m "feat: description
+
+- Change 1
+- Change 2
+
+Closes #{issue-number}"
 
 # 6. Push and create PR
 git push origin feature/{name}
+# Create PR via GitHub UI using the link shown in terminal
 ```
 
 **Critical:** Every change requires:
-1. Documentation in `releases/`
-2. Passing `npm run lint` with zero errors
-3. Successful `npm run build`
-4. Proper conventional commit message
-5. Reference to issue number in commit/PR
+1. **Feature branch created from `origin/main` as the VERY FIRST STEP**
+2. Documentation in `releases/` with git workflow section
+3. Passing `npm run lint` with zero errors
+4. Successful `npm run build`
+5. Proper conventional commit message
+6. Reference to issue number in commit/PR
+7. Pull request created via GitHub UI
