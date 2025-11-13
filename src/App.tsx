@@ -1,18 +1,15 @@
 import { useState, useMemo } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import type { Selection, Config } from './types';
 import { DEFAULT_CONFIG } from './config';
 import { computeScore } from './computeScore';
 import Header from './components/Header';
-import PropertyTitleInput from './components/PropertyTitleInput';
-import MetricsGrid from './components/MetricsGrid';
-import ScorePanel from './components/ScorePanel';
 import FooterActions from './components/FooterActions';
-import ConfigEditorModal from './components/ConfigEditorModal';
+import DashboardPage from './pages/DashboardPage';
+import SettingsPage from './pages/SettingsPage';
 import './App.css';
 
 function App() {
-  const [propertyTitle, setPropertyTitle] = useState('');
-
   // Load config from localStorage or use default
   const [config, setConfig] = useState<Config>(() => {
     const saved = localStorage.getItem('propertyEstimatorConfig');
@@ -32,7 +29,6 @@ function App() {
   }, [config]);
 
   const [selections, setSelections] = useState<Selection>(initialSelections);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const scoreResult = useMemo(() => {
     return computeScore(config, selections);
@@ -51,7 +47,7 @@ function App() {
 
   const handleCopy = async () => {
     const summary = `
-Property: ${propertyTitle || 'Unnamed Property'}
+Property: Unnamed Property
 Status: ${scoreResult.status}
 Final Score: ${scoreResult.score}
 
@@ -74,10 +70,6 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
     }
   };
 
-  const handleEditSettings = () => {
-    setIsModalOpen(true);
-  };
-
   const handleSaveConfig = (newConfig: Config) => {
     setConfig(newConfig);
     localStorage.setItem('propertyEstimatorConfig', JSON.stringify(newConfig));
@@ -94,32 +86,32 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
 
   return (
     <div className="app">
-      <Header onEditSettings={handleEditSettings} />
-      <PropertyTitleInput
-        value={propertyTitle}
-        onChange={setPropertyTitle}
-      />
-      <div className="app__main">
-        <MetricsGrid
-          config={config}
-          selections={selections}
-          onSelect={handleSelect}
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <DashboardPage
+              config={config}
+              selections={selections}
+              scoreResult={scoreResult}
+              onSelect={handleSelect}
+            />
+          }
         />
-        <ScorePanel
-          propertyTitle={propertyTitle}
-          scoreResult={scoreResult}
-          config={config}
+        <Route
+          path="/settings"
+          element={
+            <SettingsPage
+              config={config}
+              onSave={handleSaveConfig}
+            />
+          }
         />
-      </div>
+      </Routes>
       <FooterActions
         onReset={handleReset}
         onCopy={handleCopy}
-      />
-      <ConfigEditorModal
-        isOpen={isModalOpen}
-        config={config}
-        onSave={handleSaveConfig}
-        onClose={() => setIsModalOpen(false)}
       />
     </div>
   );

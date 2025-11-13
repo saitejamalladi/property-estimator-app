@@ -1,0 +1,139 @@
+.settings-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 200px);
+}
+
+.settings-page__container {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.settings-page__title {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.settings-page__description {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.settings-page__editor {
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.settings-page__errors {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.settings-page__errors h3 {
+  margin: 0 0 0.5rem 0;
+  color: #c00;
+  font-size: 1rem;
+}
+
+.settings-page__errors ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #c00;
+}
+
+.settings-page__errors li {
+  margin-bottom: 0.25rem;
+}
+
+.settings-page__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.settings-page__actions button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.settings-page__actions button:first-child {
+  background: #6c757d;
+  color: white;
+}
+
+.settings-page__actions button:first-child:hover {
+  background: #5a6268;
+}
+
+.settings-page__actions button:nth-child(2) {
+  background: #007bff;
+  color: white;
+}
+
+.settings-page__actions button:nth-child(2):hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.settings-page__actions button:nth-child(2):disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.settings-page__actions button:last-child {
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.settings-page__actions button:last-child:hover {
+  background: #e9ecef;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 1rem;
+  }
+
+  .settings-page__container {
+    padding: 1.5rem;
+  }
+
+  .settings-page__title {
+    font-size: 1.5rem;
+  }
+
+  .settings-page__actions {
+    flex-direction: column;
+  }
+
+  .settings-page__actions button {
+    width: 100%;
+  }
+}
