@@ -108,6 +108,7 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
         <ScorePanel
           propertyTitle={propertyTitle}
           scoreResult={scoreResult}
+          config={config}
         />
       </div>
       <FooterActions
