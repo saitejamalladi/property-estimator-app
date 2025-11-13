@@ -8,11 +8,12 @@ type MetricColumnProps = {
   weight: number;
   selectedOptionId: string;
   onSelect: (metricId: string, optionId: string) => void;
+  categoryColor: string;
 };
 
-function MetricColumn({ metricId, metric, weight, selectedOptionId, onSelect }: MetricColumnProps) {
+function MetricColumn({ metricId, metric, weight, selectedOptionId, onSelect, categoryColor }: MetricColumnProps) {
   return (
-    <div className="metric-column">
+    <div className={`metric-column metric-column--${metricId}`} style={{ backgroundColor: categoryColor }}>
       <div className="metric-column__header">
         <h3 className="metric-column__title">{metric.label}</h3>
         <span className="metric-column__weight">{(weight * 100).toFixed(0)}%</span>
