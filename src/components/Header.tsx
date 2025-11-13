@@ -1,16 +1,13 @@
+import { Link } from 'react-router-dom';
 import './Header.css';
 
-type HeaderProps = {
-  onEditSettings: () => void;
-};
-
-function Header({ onEditSettings }: HeaderProps) {
+function Header() {
   return (
     <header className="header">
       <h1 className="header__title">Property Estimator</h1>
-      <button className="header__edit-button" onClick={onEditSettings}>
+      <Link to="/settings" className="header__edit-button">
         Edit Settings
-      </button>
+      </Link>
     </header>
   );
 }
