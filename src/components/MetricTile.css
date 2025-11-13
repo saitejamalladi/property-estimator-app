@@ -1,17 +1,18 @@
 .metric-tile {
-  width: 100%;
+  width: 150px;
+  height: 150px;
   padding: 1rem;
   border: 2px solid #e5e7eb;
   border-radius: 8px;
   background-color: white;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
-  min-height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .metric-tile:hover {
@@ -42,11 +43,13 @@
   font-weight: 600;
   color: #1f2937;
   margin-bottom: 0.5rem;
-  line-height: 1.5;
+  line-height: 1.3;
+  font-size: 0.875rem;
+  text-align: center;
 }
 
 .metric-tile__multiplier {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #6b7280;
   font-weight: 400;
   margin-left: 0.25rem;
