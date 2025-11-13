@@ -1,12 +1,13 @@
-import type { ScoreResult } from '../types';
+import type { ScoreResult, Config } from '../types';
 import './ScorePanel.css';
 
 type ScorePanelProps = {
   propertyTitle: string;
   scoreResult: ScoreResult;
+  config: Config;
 };
 
-function ScorePanel({ propertyTitle, scoreResult }: ScorePanelProps) {
+function ScorePanel({ propertyTitle, scoreResult, config }: ScorePanelProps) {
   const { status, score, failures } = scoreResult;
 
   return (
@@ -27,11 +28,14 @@ function ScorePanel({ propertyTitle, scoreResult }: ScorePanelProps) {
         <div className="score-panel__failures">
           <h3 className="score-panel__failures-title">Deal Breakers:</h3>
           <ul className="score-panel__failures-list">
-            {failures.map((failure, index) => (
-              <li key={index} className="score-panel__failure-item">
-                {failure.reason}
-              </li>
-            ))}
+            {failures.map((failure, index) => {
+              const metricLabel = config.metrics[failure.metricId]?.label || 'Unknown';
+              return (
+                <li key={index} className="score-panel__failure-item">
+                  {metricLabel}: {failure.reason}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
