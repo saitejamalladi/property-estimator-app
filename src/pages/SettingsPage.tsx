@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JsonEditor from 'react-json-editor-ajrm';
 // @ts-expect-error - react-json-editor-ajrm types don't include locale
@@ -59,10 +59,18 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
   const navigate = useNavigate();
   const [jsonData, setJsonData] = useState(config);
   const [errors, setErrors] = useState<string[]>([]);
+  const currentConfigRef = useRef<Config>(config);
 
   useEffect(() => {
     setJsonData(config);
+    currentConfigRef.current = config;
   }, [config]);
+
+  const handleJsonChange = useCallback((data: { jsObject?: Config }) => {
+    const newData = data.jsObject || currentConfigRef.current;
+    setJsonData(newData);
+    currentConfigRef.current = newData;
+  }, []);
 
   const validateConfig = (data: unknown): boolean => {
     const validate = ajv.compile(schema);
@@ -76,18 +84,19 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
   };
 
   const handleSave = () => {
-    if (validateConfig(jsonData)) {
-      onSave(jsonData as Config);
+    const dataToSave = currentConfigRef.current;
+    if (validateConfig(dataToSave)) {
+      onSave(dataToSave);
       navigate('/');
     }
   };
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(JSON.stringify(jsonData, null, 2));
+      await navigator.clipboard.writeText(JSON.stringify(currentConfigRef.current, null, 2));
       alert('Config copied to clipboard!');
     } catch {
-      alert('Failed to copy. Please copy manually:\n' + JSON.stringify(jsonData, null, 2));
+      alert('Failed to copy. Please copy manually:\n' + JSON.stringify(currentConfigRef.current, null, 2));
     }
   };
 
@@ -105,7 +114,7 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
         <div className="settings-page__editor">
           <JsonEditor
             placeholder={jsonData}
-            onChange={(data: { jsObject?: Config }) => setJsonData(data.jsObject || jsonData)}
+            onChange={handleJsonChange}
             theme="light_mitsuketa_tribute"
             height="500px"
             locale={locale}

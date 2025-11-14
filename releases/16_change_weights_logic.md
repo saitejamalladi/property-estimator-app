@@ -49,9 +49,17 @@ Modify the scoring logic to simplify weight management. Instead of requiring use
 - Format: "Schools: 4 (20%), Public Transport: 1 (5%), ..."
 - Use light styling to show this is calculated, not editable
 
-### 7. Update Documentation (if exists)
-- Update any documentation that mentions weight constraints
-- Document the new simplified weight input system
+### 7. Fix Percentage Display in MetricColumn
+- **File:** `src/components/MetricColumn.tsx`
+- **File:** `src/components/MetricsGrid.tsx`
+- Update MetricColumn to calculate percentages from raw weights instead of assuming normalized weights
+- Add `allWeights` prop to MetricColumn to access all weights for percentage calculation
+- Update MetricsGrid to pass `allWeights={config.weights}` to MetricColumn
+
+### 8. Update Default Configuration to Match Issue Example
+- **File:** `src/config.ts`
+- Change default weights to match the example from issue #16: `{ schools: 4, public_transport: 1, groceries: 3, house_quality: 12 }`
+- This gives the expected percentages: schools 20%, public_transport 5%, groceries 15%, house_quality 60%
 
 ## Estimated Effort
 - **Time:** 2-3 hours
@@ -234,6 +242,16 @@ git commit -m "feat: simplify weights with automatic normalization
 - Add percentage display in settings showing calculated distribution
 - Update default config to use simple integer weights
 - Allow any positive numbers as weight input
+
+Closes #16"
+
+# Additional fix commit for percentage display issues
+git commit -m "fix: correct percentage display and config handling
+
+- Fix MetricColumn to calculate percentages from raw weights instead of assuming normalized weights
+- Update MetricsGrid to pass allWeights to MetricColumn for percentage calculation
+- Update default config to match issue #16 example weights (4, 1, 3, 12)
+- Ensure settings page shows actual stored config values without transformation
 
 Closes #16"
 ```
