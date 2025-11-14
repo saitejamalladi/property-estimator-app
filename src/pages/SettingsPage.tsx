@@ -66,8 +66,24 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
     currentConfigRef.current = config;
   }, [config]);
 
-  const handleJsonChange = useCallback((data: { jsObject?: Config }) => {
-    const newData = data.jsObject || currentConfigRef.current;
+  const handleJsonChange = useCallback((data: { jsObject?: Config; plainText?: string }) => {
+    let newData = currentConfigRef.current;
+    
+    if (data.jsObject) {
+      // Valid JSON object
+      newData = data.jsObject;
+    } else if (data.plainText) {
+      // Try to parse the plain text
+      try {
+        const parsed = JSON.parse(data.plainText);
+        if (parsed && typeof parsed === 'object') {
+          newData = parsed as Config;
+        }
+      } catch (e) {
+        // Invalid JSON, keep current data
+      }
+    }
+    
     setJsonData(newData);
     currentConfigRef.current = newData;
   }, []);
