@@ -6,10 +6,10 @@ export const DEFAULT_CONFIG: Config = {
     formula: "Final = basePoints * product(1 + (m_i - 1) * w_i)"
   },
   weights: {
-    schools: 4,
-    public_transport: 3,
-    groceries: 2,
-    house_quality: 1
+    schools: 5.5,
+    public_transport: 1,
+    groceries: 3,
+    house_quality: 2
   },
   metrics: {
     schools: {
