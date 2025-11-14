@@ -133,16 +133,20 @@ Additional context
 
 ### 1. Create Feature Branch (FIRST STEP - MANDATORY)
 
-**Before doing anything else**, create a feature branch from remote main:
+**Before doing anything else**, create a feature branch from remote main. **Always use a unique branch name** - if your chosen name already exists, append a number or find an alternative.
 
 ```bash
-# STEP 1: Create and switch to feature branch from remote main
-git checkout -b feature/{descriptive-name} origin/main
+# STEP 1: Check existing branches and create unique feature branch from remote main
+git fetch origin
+git branch -r | grep "origin/feature/"  # Check existing feature branches
 
-# Examples:
-git checkout -b feature/inline-metric-value origin/main
-git checkout -b feature/edit-json-config origin/main
-git checkout -b feature/add-dark-mode origin/main
+# Create branch with unique name (examples):
+git checkout -b feature/change-weights-logic origin/main
+# If exists, try: feature/change-weights-logic-2
+# Or: feature/weights-auto-normalization
+
+# Verify you're on the new branch
+git branch
 ```
 
 **Never work directly on `main` branch. Always create a feature branch first.**
@@ -495,7 +499,7 @@ git push origin feature/{name}
 ```
 
 **Critical:** Every change requires:
-1. **Feature branch created from `origin/main` as the VERY FIRST STEP**
+1. **Feature branch created from `origin/main` as the VERY FIRST STEP** (use unique name if chosen name exists)
 2. Documentation in `releases/` with git workflow section
 3. Passing `npm run lint` with zero errors
 4. Successful `npm run build`
