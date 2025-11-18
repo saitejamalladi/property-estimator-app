@@ -6,8 +6,14 @@ export function computeScore(cfg: Config, sel: Selection): ScoreResult {
   const failures: { metricId: string; reason: string }[] = [];
   let product = 1;
 
+  // Extract weights from metrics
+  const weights: Record<string, number> = {};
+  for (const [metricId, metric] of Object.entries(cfg.metrics)) {
+    weights[metricId] = metric.weight;
+  }
+
   // Normalize weights to [0, 1] range
-  const normalizedWeights = normalizeWeights(cfg.weights);
+  const normalizedWeights = normalizeWeights(weights);
 
   for (const [metricId, metric] of Object.entries(cfg.metrics)) {
     const optionId = sel[metricId];

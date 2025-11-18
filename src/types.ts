@@ -7,6 +7,7 @@ export type Option = {
 
 export type Metric = {
   label: string;
+  weight: number;
   options: Option[];
 };
 
@@ -15,7 +16,6 @@ export type Config = {
     basePoints: number;
     formula: string;
   };
-  weights: Record<string, number>;
   metrics: Record<string, Metric>;
 };
 

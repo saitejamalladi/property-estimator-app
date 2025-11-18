@@ -19,8 +19,8 @@ function MetricsGrid({ config, selections, onSelect }: MetricsGridProps) {
             key={metricId}
             metricId={metricId}
             metric={metric}
-            weight={config.weights[metricId]}
-            allWeights={config.weights}
+            weight={metric.weight}
+            allWeights={Object.fromEntries(Object.entries(config.metrics).map(([id, m]) => [id, m.weight]))}
             selectedOptionId={selections[metricId]}
             onSelect={onSelect}
             categoryColor={categoryColor}
