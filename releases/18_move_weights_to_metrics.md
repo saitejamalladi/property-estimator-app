@@ -204,18 +204,18 @@ git push origin feature/move-weights-to-metrics
 Create the PR via GitHub UI and use the PR template.
 
 ## Pre-PR Checklist
-- [ ] Release documentation file created/updated in `releases/` (this file)
-- [ ] `npm run lint` passes with no errors
-- [ ] `npm run build` completes successfully (no TS errors)
-- [ ] Manual testing completed (desktop + mobile responsiveness)
-- [ ] Migration logic tested with old config formats
-- [ ] Scoring calculations verified with new structure
-- [ ] Config editing works with embedded weights
-- [ ] Percentages display correctly in UI
-- [ ] Accessibility respected (keyboard navigation, ARIA labels)
-- [ ] Feature branch created from `origin/main` as FIRST STEP
-- [ ] Descriptive branch name used
-- [ ] Commit message uses Conventional Commits and references issue
+- [x] Release documentation file created/updated in `releases/` (this file)
+- [x] `npm run lint` passes with no errors
+- [x] `npm run build` completes successfully (no TS errors)
+- [x] Manual testing completed (desktop + mobile responsiveness)
+- [x] Migration logic tested with old config formats (N/A - localStorage erased)
+- [x] Scoring calculations verified with new structure
+- [x] Config editing works with embedded weights
+- [x] Percentages display correctly in UI
+- [x] Accessibility respected (keyboard navigation, ARIA labels)
+- [x] Feature branch created from `origin/main` as FIRST STEP
+- [x] Descriptive branch name used
+- [x] Commit message uses Conventional Commits and references issue
 
 ## Notes
 - Migration handles both old and new config formats automatically
