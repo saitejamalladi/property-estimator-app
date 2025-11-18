@@ -154,17 +154,17 @@ git push origin feature/change-weights-logic
 Create the PR via GitHub UI (link appears in terminal or use repo URL) and use the PR template.
 
 ## Pre-PR Checklist
-- [ ] Release documentation file created/updated in `releases/` (this file)
-- [ ] `npm run lint` passes with no errors
-- [ ] `npm run build` completes successfully (no TS errors)
-- [ ] Manual testing completed (desktop + mobile responsiveness)
-- [ ] Scoring calculations verified with various weight combinations
-- [ ] Config editing and saving works with new validation
-- [ ] Percentages display correctly in UI
-- [ ] Accessibility respected (keyboard navigation, ARIA labels)
-- [ ] Feature branch created from `origin/main` as FIRST STEP
-- [ ] Descriptive branch name used
-- [ ] Commit message uses Conventional Commits and references issue
+- [x] Release documentation file created/updated in `releases/` (this file)
+- [x] `npm run lint` passes with no errors
+- [x] `npm run build` completes successfully (no TS errors)
+- [x] Manual testing completed (desktop + mobile responsiveness)
+- [x] Scoring calculations verified with various weight combinations
+- [x] Config editing and saving works with new validation
+- [x] Percentages display correctly in UI
+- [x] Accessibility respected (keyboard navigation, ARIA labels)
+- [x] Feature branch created from `origin/main` as FIRST STEP
+- [x] Descriptive branch name used
+- [x] Commit message uses Conventional Commits and references issue
 
 ## Notes
 - Backward compatibility: Existing configs with normalized weights should still work

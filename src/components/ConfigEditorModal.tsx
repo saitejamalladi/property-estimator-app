@@ -24,7 +24,7 @@ const schema = {
     },
     weights: {
       type: 'object',
-      patternProperties: { '.*': { type: 'number', minimum: 0, maximum: 1 } }
+      patternProperties: { '.*': { type: 'number', minimum: 0 } }
     },
     metrics: {
       type: 'object',
@@ -101,12 +101,6 @@ function ConfigEditorModal({ isOpen, config, onSave, onClose }: ConfigEditorModa
     const valid = validate(data);
     if (!valid) {
       setErrors(validate.errors?.map(e => `${e.instancePath}: ${e.message}`) || []);
-      return false;
-    }
-    // Additional check: weights sum to 1
-    const weightSum = Object.values(data.weights).reduce((sum: number, w: number) => sum + w, 0);
-    if (Math.abs(weightSum - 1) > 0.01) {
-      setErrors(['Weights must sum to 1']);
       return false;
     }
     setErrors([]);

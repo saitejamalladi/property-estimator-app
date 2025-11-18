@@ -20,6 +20,7 @@ function MetricsGrid({ config, selections, onSelect }: MetricsGridProps) {
             metricId={metricId}
             metric={metric}
             weight={config.weights[metricId]}
+            allWeights={config.weights}
             selectedOptionId={selections[metricId]}
             onSelect={onSelect}
             categoryColor={categoryColor}

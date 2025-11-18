@@ -31,6 +31,64 @@
   overflow: hidden;
 }
 
+.settings-page__percentages {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.settings-page__percentages h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: #495057;
+}
+
+.percentages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.percentage-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.category-name {
+  font-weight: 500;
+  color: #495057;
+  min-width: 120px;
+}
+
+.raw-weight {
+  color: #6c757d;
+  font-family: monospace;
+  background: #f8f9fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.arrow {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.percentage {
+  font-weight: 600;
+  color: #007bff;
+  min-width: 50px;
+  text-align: right;
+}
+
 .settings-page__errors {
   background: #fee;
   border: 1px solid #fcc;

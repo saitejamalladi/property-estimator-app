@@ -5,6 +5,7 @@ import JsonEditor from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
 import Ajv from 'ajv';
 import type { Config } from '../types';
+import { calculatePercentages } from '../utils/normalizeWeights';
 import './SettingsPage.css';
 
 type SettingsPageProps = {
@@ -23,7 +24,7 @@ const schema = {
     },
     weights: {
       type: 'object',
-      patternProperties: { '.*': { type: 'number', minimum: 0, maximum: 1 } }
+      patternProperties: { '.*': { type: 'number', minimum: 0 } }
     },
     metrics: {
       type: 'object',
@@ -70,12 +71,6 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
       setErrors(validate.errors?.map(e => `${e.instancePath}: ${e.message}`) || []);
       return false;
     }
-    // Additional check: weights sum to 1
-    const weightSum = Object.values((data as Config).weights).reduce((sum: number, w: number) => sum + w, 0);
-    if (Math.abs(weightSum - 1) > 0.01) {
-      setErrors(['Weights must sum to 1']);
-      return false;
-    }
     setErrors([]);
     return true;
   };
@@ -116,6 +111,19 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
             locale={locale}
             aria-label="JSON configuration editor"
           />
+        </div>
+        <div className="settings-page__percentages">
+          <h3>Calculated Weight Percentages</h3>
+          <div className="percentages-grid">
+            {Object.entries(calculatePercentages(jsonData.weights)).map(([key, pct]) => (
+              <div key={key} className="percentage-item">
+                <span className="category-name">{key}:</span>
+                <span className="raw-weight">{jsonData.weights[key]}</span>
+                <span className="arrow">→</span>
+                <span className="percentage">{Number(pct).toFixed(0)}%</span>
+              </div>
+            ))}
+          </div>
         </div>
         {errors.length > 0 && (
           <div className="settings-page__errors" role="alert" aria-live="polite">
