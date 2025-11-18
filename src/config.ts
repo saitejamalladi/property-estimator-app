@@ -31,7 +31,7 @@ export const DEFAULT_CONFIG: Config = {
         { id: "brand_new", label: "Brand New", value: 1.5 },
         { id: "within_8_years", label: "Within 8 years old", value: 1.0, default: true },
         { id: "8_15_years", label: "8-15 years old", value: 0.8 },
-        { id: "over_15_years", label: "More than 15 years old", value: 0.0, gateFail: true }
+        { id: "over_15_years", label: "More than 15 years old", value: 0.75, gateFail: true }
       ]
     },
     property_price: {
@@ -139,7 +139,7 @@ export const DEFAULT_CONFIG: Config = {
       weight: 2,
       options: [
         { id: "decent", label: "Decent", value: 1.5 },
-        { id: "very_high", label: "Very High", value: 1.3, default: true },
+        { id: "very_high", label: "Very High", value: 1.0, default: true },
         { id: "very_low", label: "Very Low or No Community", value: 0.8, gateFail: true }
       ]
     }
