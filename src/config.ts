@@ -2,7 +2,7 @@ import type { Config } from './types';
 
 export const DEFAULT_CONFIG: Config = {
   aggregation: {
-    basePoints: 50,
+    basePoints: 5,
     formula: "Final = basePoints * product(1 + (m_i - 1) * w_i)"
   },
   metrics: {
