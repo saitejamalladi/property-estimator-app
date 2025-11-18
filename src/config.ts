@@ -310,7 +310,8 @@ export const DEFAULT_CONFIG: Config = {
         {
           "id": "over_1h",
           "label": "More than 1 hour",
-          "value": 0.75
+          "value": 0.75,
+          "gateFail": true
         }
       ]
     },
@@ -332,7 +333,8 @@ export const DEFAULT_CONFIG: Config = {
         {
           "id": "over_30m",
           "label": "More than 30 mins",
-          "value": 0.75
+          "value": 0.75,
+          "gateFail": true
         }
       ]
     },
