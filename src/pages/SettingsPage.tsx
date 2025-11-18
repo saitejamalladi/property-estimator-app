@@ -22,10 +22,6 @@ const schema = {
       properties: { basePoints: { type: 'number', minimum: 0 } },
       required: ['basePoints']
     },
-    weights: {
-      type: 'object',
-      patternProperties: { '.*': { type: 'number', minimum: 0 } }
-    },
     metrics: {
       type: 'object',
       patternProperties: {
@@ -53,7 +49,7 @@ const schema = {
       }
     }
   },
-  required: ['aggregation', 'weights', 'metrics']
+  required: ['aggregation', 'metrics']
 };
 
 function SettingsPage({ config, onSave }: SettingsPageProps) {
