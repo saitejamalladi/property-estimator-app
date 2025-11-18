@@ -33,6 +33,7 @@ const schema = {
           type: 'object',
           properties: {
             label: { type: 'string' },
+            weight: { type: 'number', minimum: 0 },
             options: {
               type: 'array',
               items: {
@@ -47,7 +48,7 @@ const schema = {
               }
             }
           },
-          required: ['label', 'options']
+          required: ['label', 'weight', 'options']
         }
       }
     }

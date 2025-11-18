@@ -33,6 +33,7 @@ const schema = {
           type: 'object',
           properties: {
             label: { type: 'string' },
+            weight: { type: 'number', minimum: 0 },
             options: {
               type: 'array',
               items: {
@@ -47,7 +48,7 @@ const schema = {
               }
             }
           },
-          required: ['label', 'options']
+          required: ['label', 'weight', 'options']
         }
       }
     }
@@ -115,10 +116,10 @@ function SettingsPage({ config, onSave }: SettingsPageProps) {
         <div className="settings-page__percentages">
           <h3>Calculated Weight Percentages</h3>
           <div className="percentages-grid">
-            {Object.entries(calculatePercentages(jsonData.weights)).map(([key, pct]) => (
+            {Object.entries(calculatePercentages(Object.fromEntries(Object.entries(jsonData.metrics).map(([id, metric]) => [id, metric.weight])))).map(([key, pct]) => (
               <div key={key} className="percentage-item">
                 <span className="category-name">{key}:</span>
-                <span className="raw-weight">{jsonData.weights[key]}</span>
+                <span className="raw-weight">{jsonData.metrics[key]?.weight || 0}</span>
                 <span className="arrow">→</span>
                 <span className="percentage">{Number(pct).toFixed(0)}%</span>
               </div>
