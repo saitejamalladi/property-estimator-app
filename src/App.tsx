@@ -16,13 +16,15 @@ function App() {
     return saved ? JSON.parse(saved) : DEFAULT_CONFIG;
   });
 
-  // Initialize selections with first non-gateFail option for each metric
+  // Initialize selections with default option for each metric (or first non-gateFail if no default set)
   const initialSelections: Selection = useMemo(() => {
     const selections: Selection = {};
     Object.entries(config.metrics).forEach(([metricId, metric]) => {
-      const firstNonGateFail = metric.options.find(opt => !opt.gateFail);
-      if (firstNonGateFail) {
-        selections[metricId] = firstNonGateFail.id;
+      const defaultOption = metric.options.find(opt => opt.default);
+      const fallbackOption = metric.options.find(opt => !opt.gateFail);
+      const selectedOption = defaultOption || fallbackOption;
+      if (selectedOption) {
+        selections[metricId] = selectedOption.id;
       }
     });
     return selections;
@@ -76,9 +78,11 @@ ${scoreResult.failures.length > 0 ? `\nDeal Breakers:\n${scoreResult.failures.ma
     // Reset selections to match new config
     const newSelections: Selection = {};
     Object.entries(newConfig.metrics).forEach(([metricId, metric]) => {
-      const firstNonGateFail = metric.options.find(opt => !opt.gateFail);
-      if (firstNonGateFail) {
-        newSelections[metricId] = firstNonGateFail.id;
+      const defaultOption = metric.options.find(opt => opt.default);
+      const fallbackOption = metric.options.find(opt => !opt.gateFail);
+      const selectedOption = defaultOption || fallbackOption;
+      if (selectedOption) {
+        newSelections[metricId] = selectedOption.id;
       }
     });
     setSelections(newSelections);

@@ -3,6 +3,7 @@ export type Option = {
   label: string;
   value: number;
   gateFail?: boolean;
+  default?: boolean;
 };
 
 export type Metric = {
