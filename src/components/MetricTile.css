@@ -1,7 +1,7 @@
 .metric-tile {
   width: 150px;
-  height: 45px; /* Reduced from 150px to 30% (70% reduction) */
-  padding: 0.5rem; /* Reduced padding to fit smaller height */
+  height: 105px; /* Reduced from 150px by 30% (45px reduction) */
+  padding: 0.75rem; /* Adjusted padding for medium-sized tile */
   border: 2px solid #e5e7eb;
   border-radius: 8px;
   background-color: white;
@@ -50,14 +50,14 @@
 .metric-tile__label {
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 0.25rem; /* Reduced margin for smaller tile */
-  line-height: 1.2;
-  font-size: 0.75rem; /* Smaller font size */
+  margin-bottom: 0.375rem; /* Medium margin for 105px height */
+  line-height: 1.25;
+  font-size: 0.8rem; /* Medium font size */
   text-align: center;
 }
 
 .metric-tile__multiplier {
-  font-size: 0.65rem; /* Smaller font size */
+  font-size: 0.7rem; /* Medium font size */
   color: #6b7280;
   font-weight: 400;
   margin-left: 0.25rem;
